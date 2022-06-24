@@ -3,11 +3,23 @@
   import Logo from "./lib/Logo.svelte";
   import DiscordLogo from "./lib/DiscordLogo.svelte";
 
-  async function getURL() {
-    const files = Object.keys(import.meta.globEager('./assets/*'))
-    const i = Math.floor(Math.random() * (files.length - 1));
+  import asset1 from './assets/1.jpg'
+  import asset2 from './assets/2.png'
+  import asset3 from './assets/3.png'
+  import asset4 from './assets/4.png'
+  import asset5 from './assets/5.png'
 
-    url = files[i];
+  const assets = [
+    asset1,
+    asset2,
+    asset3,
+    asset4,
+    asset5,
+  ]
+
+  async function getAsset() {
+    const i = Math.floor(Math.random() * (assets.length - 1));
+    src = assets[i]
   }
 
   function handleMouseEnter() {
@@ -16,18 +28,15 @@
 
   function handleMouseLeave() {
     if (loadTimer) clearTimeout(loadTimer);
-    loadTimer = setTimeout(getURL, 100);
+    loadTimer = setTimeout(getAsset, 100);
   }
 
   let loadTimer: number;
-  let url: string;
   const href = "https://discord.com/channels/425752052245856256/936026417026727957"
-
-  $: src = url && import(/* @vite-ignore */ url).then((r) => r.default);
+  let src: any
 
   onMount(async () => {
-    await getURL();
-    await src;
+    await getAsset();
   });
 </script>
 
