@@ -18,7 +18,7 @@
   ]
 
   async function getAsset() {
-    const i = Math.floor(Math.random() * (assets.length - 1));
+    const i = Math.floor(Math.random() * assets.length);
     src = assets[i]
   }
 
